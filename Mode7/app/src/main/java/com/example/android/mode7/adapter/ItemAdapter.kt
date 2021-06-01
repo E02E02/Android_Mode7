@@ -1,25 +1,26 @@
 package com.example.android.mode7.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android.mode7.BackgroundFragment
 import com.example.android.mode7.R
+import com.example.android.mode7.helper.ItemTouchHelperAdapter
 import com.example.android.mode7.model.BackgroundMap
-
+import com.example.android.mode7.model.SharedViewModel
 
 /**
  * Adapter for the [RecyclerView] in [BackgroundFragment]. Displays [Map] data object.
  */
 class ItemAdapter(
     private val context: RecyclerView,
-    private val dataset: List<BackgroundMap>
-): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+    private val dataset: List<BackgroundMap>,
+    private val viewModel : SharedViewModel,
+): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() , ItemTouchHelperAdapter {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -55,6 +56,15 @@ class ItemAdapter(
      */
     override fun getItemCount(): Int {
         return dataset.size
+    }
+
+    override fun onMoveItem(from: Int, to: Int) {
+        //viewModel.moveItem(from, to) { notifyItemMoved(from, to) }
+        Log.d("debug", "valeur" + "de" + from + "a" + to)
+    }
+
+    override fun onItemDismiss(from: Int) {
+        viewModel.setSelectedMapNumber(from)
     }
 
 }

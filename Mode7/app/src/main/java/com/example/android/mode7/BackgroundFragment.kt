@@ -1,7 +1,5 @@
 package com.example.android.mode7
 
-import android.util.Log
-
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -11,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.android.mode7.adapter.ItemAdapter
 import com.example.android.mode7.data.Datasource
 import com.example.android.mode7.databinding.FragmentBackgroundBinding
+import com.example.android.mode7.helper.ItemTouchHelperCallback
 import com.example.android.mode7.model.SharedViewModel
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 
@@ -29,12 +27,11 @@ class BackgroundFragment : Fragment() {
     //SharedViewModel
     private val viewModel: SharedViewModel by activityViewModels()
 
-    //RecyclerView
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var adapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
-
     // Initialize data
-    val myDataset = Datasource().loadMaps()
+    private val myDataset = Datasource().loadMaps()
+
+    //RecyclerView
+    private val myAdapter: ItemAdapter by lazy { ItemAdapter( binding.backgroundSelect,myDataset,viewModel) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,20 +56,19 @@ class BackgroundFragment : Fragment() {
 
         binding.backgroundSelect.apply {
             // set a LinearLayoutManager to handle Android
+            // set the custom adapter to the RecyclerView
+            adapter = myAdapter
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            // set the custom adapter to the RecyclerView
-            adapter = ItemAdapter(this, myDataset)
             // enable optimizations
             this.setHasFixedSize(true);
+            // set ItemTouchHelper
+            ItemTouchHelper(ItemTouchHelperCallback(myAdapter)).attachToRecyclerView(this)
+            // set SnapHelper
+            val snapHelper: SnapHelper = GravitySnapHelper(Gravity.START)
+            snapHelper.attachToRecyclerView(binding.backgroundSelect)
         }
 
-        val snapHelper: SnapHelper = GravitySnapHelper(Gravity.START)
-        snapHelper.attachToRecyclerView(binding.backgroundSelect)
-
-        val callback: ItemTouchHelper.Callback = ItemTouchCallback(binding.backgroundSelect, viewModel)
-        val touchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(binding.backgroundSelect)
     }
 
     /**
@@ -81,33 +77,6 @@ class BackgroundFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-    }
-
-}
-
-class ItemTouchCallback(private val context: RecyclerView, private val viewModel : SharedViewModel
-) : ItemTouchHelper.Callback() {
-
-    override fun getMovementFlags(
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder
-    ): Int {
-        val dragFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
-        return makeMovementFlags( dragFlags, swipeFlags )
-    }
-
-    override fun onMove(
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder
-    ): Boolean {
-        return true;
-    }
-
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        Log.d("debug", "image : " + viewHolder.bindingAdapterPosition.toString())
-        viewModel.setSelectedMapNumber(viewHolder.bindingAdapterPosition)
     }
 
 }
