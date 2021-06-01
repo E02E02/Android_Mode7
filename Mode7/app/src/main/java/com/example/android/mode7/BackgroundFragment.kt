@@ -1,5 +1,7 @@
 package com.example.android.mode7
 
+import android.util.Log
+
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -7,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
@@ -20,53 +23,56 @@ import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
  *
  */
 class BackgroundFragment : Fragment() {
-
-    //RecyclerView
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>? = null
-
-    // Initialize data.
-    val myDataset = Datasource().loadMaps()
-
-    //Binding
-    private var binding: FragmentBackgroundBinding? = null
+    //DataBinding
+    private lateinit var binding: FragmentBackgroundBinding
 
     //SharedViewModel
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
+
+    //RecyclerView
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var adapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
+
+    // Initialize data
+    val myDataset = Datasource().loadMaps()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentBinding = FragmentBackgroundBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+
         return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*        binding?.apply {
+            // Specify the fragment as the lifecycle owner
+            lifecycleOwner = viewLifecycleOwner
+            // Assign the view model to a property in the binding class
+            shareViewModel = viewModel
+            // Assign the fragment
+            backgroundFragment = this@BackgroundFragment
+        }*/
 
-        background_select.apply {
+        binding.backgroundSelect.apply {
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             // set the custom adapter to the RecyclerView
             adapter = ItemAdapter(this, myDataset)
             // enable optimizations
-            setHasFixedSize(true);
+            this.setHasFixedSize(true);
         }
-        //
-        val snapHelper: SnapHelper = GravitySnapHelper(Gravity.START)
-        snapHelper.attachToRecyclerView(background_select)
 
-        binding?.apply {
-            // Specify the fragment as the lifecycle owner
-            lifecycleOwner = viewLifecycleOwner
-            // Assign the view model to a property in the binding class
-            viewModel = sharedViewModel
-            // Assign the fragment
-            BackgroundFragment = this@BackgroundFragment
-        }
+        val snapHelper: SnapHelper = GravitySnapHelper(Gravity.START)
+        snapHelper.attachToRecyclerView(binding.backgroundSelect)
+
+        val callback: ItemTouchHelper.Callback = ItemTouchCallback(binding.backgroundSelect, viewModel)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(binding.backgroundSelect)
     }
 
     /**
@@ -75,6 +81,33 @@ class BackgroundFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
     }
+
+}
+
+class ItemTouchCallback(private val context: RecyclerView, private val viewModel : SharedViewModel
+) : ItemTouchHelper.Callback() {
+
+    override fun getMovementFlags(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder
+    ): Int {
+        val dragFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
+        return makeMovementFlags( dragFlags, swipeFlags )
+    }
+
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean {
+        return true;
+    }
+
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        Log.d("debug", "image : " + viewHolder.bindingAdapterPosition.toString())
+        viewModel.setSelectedMapNumber(viewHolder.bindingAdapterPosition)
+    }
+
 }

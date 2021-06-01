@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ScreenFragment">
 
-    <data>
+<!--    <data>
         <variable
-            name="viewModel"
-            type="com.example.android.mode7.model.SharedViewModel" />
-
+            android:name="screenFragment"
+            android:type="com.example.android.mode7.ScreenFragment" />
         <variable
-            name="screenFragment"
-            type="com.example.android.mode7.ScreenFragment" />
-    </data>
+            android:name="sharedViewModel"
+            android:type="com.example.android.mode7.model.SharedViewModel" />
+    </data> -->
 
     <ImageView
         android:id="@+id/screen"

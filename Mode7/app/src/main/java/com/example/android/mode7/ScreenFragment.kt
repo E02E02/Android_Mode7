@@ -6,25 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.example.android.mode7.data.Datasource
 import com.example.android.mode7.databinding.FragmentScreenBinding
 import com.example.android.mode7.model.SharedViewModel
-
-// communication with background fragement : imageView.setImageResource(R.drawable.map1-7)
 
 /**
  *
  */
 class ScreenFragment : Fragment() {
-    //Binding
-    private var binding: FragmentScreenBinding? = null
+    //DataBinding
+    private lateinit var binding: FragmentScreenBinding
 
     //SharedViewModel
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
+
+    // Initialize data
+    val myDataset = Datasource().loadMaps()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentBinding = FragmentScreenBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -33,14 +36,24 @@ class ScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
+/*        binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
-            viewModel = sharedViewModel
+            shareViewModel = viewModel
             // Assign the fragment
-            ScreenFragment = this@ScreenFragment
-        }
+            screenFragment = this@ScreenFragment
+        }*/
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.selectedmapnumber.observe(viewLifecycleOwner, Observer {
+            val item = myDataset[it] // it = selectedmapnumber
+            binding.screen.setImageResource(item.imageResourceId)
+        })
+
     }
 
     /**
@@ -49,6 +62,5 @@ class ScreenFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
     }
 }

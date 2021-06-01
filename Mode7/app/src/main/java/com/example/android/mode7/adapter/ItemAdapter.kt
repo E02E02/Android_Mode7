@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android.mode7.BackgroundFragment
 import com.example.android.mode7.R
 import com.example.android.mode7.model.BackgroundMap
+
 
 /**
  * Adapter for the [RecyclerView] in [BackgroundFragment]. Displays [Map] data object.
@@ -53,4 +56,5 @@ class ItemAdapter(
     override fun getItemCount(): Int {
         return dataset.size
     }
+
 }
