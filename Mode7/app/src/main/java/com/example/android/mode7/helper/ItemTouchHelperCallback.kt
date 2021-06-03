@@ -1,19 +1,18 @@
 package com.example.android.mode7.helper
 
-import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.mode7.adapter.ItemAdapter
 
-class ItemTouchHelperCallback(private val adapter: ItemAdapter) : ItemTouchHelper.Callback() {
+class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) : ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
     ): Int {
+        //val swipeFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+        val swipeFlags = ItemTouchHelper.UP
+        //val swipeFlags = 0
         val dragFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
-
         return makeMovementFlags( dragFlags, swipeFlags )
     }
 
@@ -24,12 +23,20 @@ class ItemTouchHelperCallback(private val adapter: ItemAdapter) : ItemTouchHelpe
     ): Boolean {
         // Notify Adapter of the moved item!
         adapter.onMoveItem(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition);
-        return true;
+        return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val from = viewHolder.bindingAdapterPosition
-        adapter.onItemDismiss(from)
+        adapter.onItemChanged(viewHolder.bindingAdapterPosition)
+    }
+
+    override fun isItemViewSwipeEnabled(): Boolean {
+        return true
+    }
+
+    override fun isLongPressDragEnabled(): Boolean {
+        // Allows for long click so items can be dragged, moved up or down in the list.
+        return true
     }
 
 }

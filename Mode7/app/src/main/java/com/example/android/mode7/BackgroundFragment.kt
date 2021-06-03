@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.SnapHelper
 import com.example.android.mode7.adapter.ItemAdapter
 import com.example.android.mode7.data.Datasource
 import com.example.android.mode7.databinding.FragmentBackgroundBinding
@@ -28,10 +27,10 @@ class BackgroundFragment : Fragment() {
     private val viewModel: SharedViewModel by activityViewModels()
 
     // Initialize data
-    private val myDataset = Datasource().loadMaps()
+    private var mDataset = Datasource().loadMaps()
 
     //RecyclerView
-    private val myAdapter: ItemAdapter by lazy { ItemAdapter( binding.backgroundSelect,myDataset,viewModel) }
+    private var mAdapter : ItemAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,19 +53,20 @@ class BackgroundFragment : Fragment() {
             backgroundFragment = this@BackgroundFragment
         }*/
 
+        mAdapter =ItemAdapter(binding.backgroundSelect,mDataset,viewModel)
+
         binding.backgroundSelect.apply {
             // set a LinearLayoutManager to handle Android
             // set the custom adapter to the RecyclerView
-            adapter = myAdapter
+            adapter = mAdapter
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             // enable optimizations
             this.setHasFixedSize(true);
             // set ItemTouchHelper
-            ItemTouchHelper(ItemTouchHelperCallback(myAdapter)).attachToRecyclerView(this)
+            ItemTouchHelper(ItemTouchHelperCallback(mAdapter!!)).attachToRecyclerView(this)
             // set SnapHelper
-            val snapHelper: SnapHelper = GravitySnapHelper(Gravity.START)
-            snapHelper.attachToRecyclerView(binding.backgroundSelect)
+            GravitySnapHelper(Gravity.START).attachToRecyclerView(binding.backgroundSelect)
         }
 
     }

@@ -22,7 +22,7 @@ class ScreenFragment : Fragment() {
     private val viewModel: SharedViewModel by activityViewModels()
 
     // Initialize data
-    val myDataset = Datasource().loadMaps()
+    val mDataset = Datasource().loadMaps()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,7 @@ class ScreenFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.selectedmapnumber.observe(viewLifecycleOwner, Observer {
-            val item = myDataset[it] // it = selectedmapnumber
+            val item = mDataset[it] // it = selectedmapnumber
             binding.screen.setImageResource(item.imageResourceId)
         })
 

@@ -1,6 +1,5 @@
 package com.example.android.mode7.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class ItemAdapter(
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
-    class ItemViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
         val imageView: ImageView = view.findViewById(R.id.item_image)
     }
@@ -37,7 +36,7 @@ class ItemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-                .inflate(R.layout.map_item, parent, false)
+            .inflate(R.layout.map_item, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
@@ -45,10 +44,10 @@ class ItemAdapter(
     /**
      * Replace the contents of a view (invoked by the layout manager)
      */
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = context.resources.getString(item.stringResourceId)
-        holder.imageView.setImageResource(item.imageResourceId)
+        viewHolder.textView.text = context.resources.getString(item.stringResourceId)
+        viewHolder.imageView.setImageResource(item.imageResourceId)
     }
 
     /**
@@ -58,12 +57,13 @@ class ItemAdapter(
         return dataset.size
     }
 
-    override fun onMoveItem(from: Int, to: Int) {
-        //viewModel.moveItem(from, to) { notifyItemMoved(from, to) }
-        Log.d("debug", "valeur" + "de" + from + "a" + to)
+    override fun onMoveItem(from: Int, to: Int): Boolean {
+        notifyItemMoved(from, to)
+        return true
     }
 
-    override fun onItemDismiss(from: Int) {
+    override fun onItemChanged(from: Int) {
+        notifyItemChanged(from)
         viewModel.setSelectedMapNumber(from)
     }
 
