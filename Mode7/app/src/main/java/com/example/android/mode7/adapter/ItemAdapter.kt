@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.mode7.BackgroundFragment
 import com.example.android.mode7.R
-import com.example.android.mode7.helper.ItemTouchHelperAdapter
 import com.example.android.mode7.model.BackgroundMap
-import com.example.android.mode7.model.SharedViewModel
 
 /**
  * Adapter for the [RecyclerView] in [BackgroundFragment]. Displays [Map] data object.
@@ -18,16 +16,25 @@ import com.example.android.mode7.model.SharedViewModel
 class ItemAdapter(
     private val context: RecyclerView,
     private val dataset: List<BackgroundMap>,
-    private val viewModel : SharedViewModel,
-): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() , ItemTouchHelperAdapter {
+    private val onItemClicked: (position: Int) -> Unit
+): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(private val view: View, private val onItemClicked: (position: Int) -> Unit) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        init {
+            view.setOnClickListener(this)
+        }
+
         val textView: TextView = view.findViewById(R.id.item_title)
         val imageView: ImageView = view.findViewById(R.id.item_image)
+
+        override fun onClick(view : View) {
+            val position = absoluteAdapterPosition
+            onItemClicked(position)
+        }
     }
 
     /**
@@ -38,7 +45,7 @@ class ItemAdapter(
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.map_item, parent, false)
 
-        return ItemViewHolder(adapterLayout)
+        return ItemViewHolder(adapterLayout, onItemClicked)
     }
 
     /**
@@ -55,16 +62,6 @@ class ItemAdapter(
      */
     override fun getItemCount(): Int {
         return dataset.size
-    }
-
-    override fun onMoveItem(from: Int, to: Int): Boolean {
-        notifyItemMoved(from, to)
-        return true
-    }
-
-    override fun onItemChanged(from: Int) {
-        notifyItemChanged(from)
-        viewModel.setSelectedMapNumber(from)
     }
 
 }

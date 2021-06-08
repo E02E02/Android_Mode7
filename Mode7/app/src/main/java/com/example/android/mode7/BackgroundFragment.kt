@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.mode7.adapter.ItemAdapter
 import com.example.android.mode7.data.Datasource
 import com.example.android.mode7.databinding.FragmentBackgroundBinding
-import com.example.android.mode7.helper.ItemTouchHelperCallback
 import com.example.android.mode7.model.SharedViewModel
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 
@@ -53,7 +51,11 @@ class BackgroundFragment : Fragment() {
             backgroundFragment = this@BackgroundFragment
         }*/
 
-        mAdapter =ItemAdapter(binding.backgroundSelect,mDataset,viewModel)
+        mAdapter =ItemAdapter(binding.backgroundSelect,mDataset) { position ->
+            onListItemClick(
+                position
+            )
+        }
 
         binding.backgroundSelect.apply {
             // set a LinearLayoutManager to handle Android
@@ -63,8 +65,6 @@ class BackgroundFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             // enable optimizations
             this.setHasFixedSize(true);
-            // set ItemTouchHelper
-            ItemTouchHelper(ItemTouchHelperCallback(mAdapter!!)).attachToRecyclerView(this)
             // set SnapHelper
             GravitySnapHelper(Gravity.START).attachToRecyclerView(binding.backgroundSelect)
         }
@@ -77,6 +77,10 @@ class BackgroundFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    private fun onListItemClick(position: Int) {
+        viewModel.setSelectedMapNumber(position)
     }
 
 }
