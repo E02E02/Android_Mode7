@@ -10,16 +10,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.mode7.adapter.ItemAdapter
 import com.example.android.mode7.data.Datasource
-import com.example.android.mode7.databinding.FragmentBackgroundBinding
+import com.example.android.mode7.databinding.FragmentBackgroundSelectionBinding
 import com.example.android.mode7.model.SharedViewModel
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 
 /**
  *
  */
-class BackgroundFragment : Fragment() {
+class BackgroundSelectionFragment : Fragment() {
     //DataBinding
-    private lateinit var binding: FragmentBackgroundBinding
+    private lateinit var binding: FragmentBackgroundSelectionBinding
 
     //SharedViewModel
     private val viewModel: SharedViewModel by activityViewModels()
@@ -34,7 +34,7 @@ class BackgroundFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val fragmentBinding = FragmentBackgroundBinding.inflate(inflater, container, false)
+        val fragmentBinding = FragmentBackgroundSelectionBinding.inflate(inflater, container, false)
         binding = fragmentBinding
 
         return fragmentBinding.root
@@ -42,33 +42,28 @@ class BackgroundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-/*        binding?.apply {
+        binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
-            shareViewModel = viewModel
+            sharedViewModel = viewModel
             // Assign the fragment
-            backgroundFragment = this@BackgroundFragment
-        }*/
-
-        mAdapter =ItemAdapter(binding.backgroundSelect,mDataset) { position ->
-            onListItemClick(
-                position
-            )
+            backgroundSelectionFragment = this@BackgroundSelectionFragment
         }
 
-        binding.backgroundSelect.apply {
+        mAdapter = ItemAdapter(binding.backgroundSelection, mDataset){position -> onListItemTouched(position)}
+
+        binding.backgroundSelection.apply {
             // set a LinearLayoutManager to handle Android
             // set the custom adapter to the RecyclerView
             adapter = mAdapter
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             // enable optimizations
-            this.setHasFixedSize(true);
-            // set SnapHelper
-            GravitySnapHelper(Gravity.START).attachToRecyclerView(binding.backgroundSelect)
+            setHasFixedSize(true);
+            // set SnapHelper - Gravity
+            GravitySnapHelper(Gravity.START).attachToRecyclerView(binding.backgroundSelection)
         }
-
     }
 
     /**
@@ -79,8 +74,7 @@ class BackgroundFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun onListItemClick(position: Int) {
+    private fun onListItemTouched(position: Int) {
         viewModel.setSelectedMapNumber(position)
     }
-
 }

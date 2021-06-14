@@ -7,4 +7,9 @@
     <string name="map5">map5.png</string>
     <string name="map6">map6.png</string>
     <string name="map7">map7.png</string>
+    <string name="left_background_select"> "L" </string>
+    <string name="right_background_select">"R"</string>
+    <string name="fragment_background_selection">Fragment Background Selection</string>
+    <string name="fragment_background_transform">Fragment Background Transform</string>
+    <string name="fragment_screen">Fragment Screen</string>
 </resources>

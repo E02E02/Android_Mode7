@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ScreenFragment">
+    tools:context=".BackgroundTransformFragment">
 
     <data>
         <variable
-            name="screenFragment"
-            type="com.example.android.mode7.ScreenFragment" />
+            name="viewPort"
+            type="com.example.android.mode7.ViewPort" />
+
+        <variable
+            name="backgroundTransformFragment"
+            type="com.example.android.mode7.BackgroundTransformFragment" />
 
         <variable
             name="sharedViewModel"
@@ -18,11 +22,16 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/screen"
+            android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/fragment_screen"
+            android:contentDescription="@string/fragment_background_selection"
             android:src="@drawable/map2" />
+
+        <com.example.android.mode7.ViewPort
+            android:id="@+id/viewport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 

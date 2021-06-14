@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ScreenFragment">
+    android:background="@color/colorBackground"
+    tools:context=".BackgroundSelectionFragment">
 
     <data>
         <variable
-            name="screenFragment"
-            type="com.example.android.mode7.ScreenFragment" />
+            name="backgroundSelectionFragment"
+            type="com.example.android.mode7.BackgroundSelectionFragment" />
 
         <variable
             name="sharedViewModel"
@@ -17,12 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/screen"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/background_selection"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/fragment_screen"
-            android:src="@drawable/map2" />
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 

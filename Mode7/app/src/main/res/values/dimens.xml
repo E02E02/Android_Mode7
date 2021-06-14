@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="viewPortRectRight">120dp</dimen>
+    <dimen name="viewPortRectBottom">120dp</dimen>
+    <dimen name="viewPortRectTop">0dp</dimen>
+    <dimen name="viewPortRectLeft">0dp</dimen>
+    <dimen name="strokeWidth">4dp</dimen>
+    <dimen name="textSize">18sp</dimen>
+</resources>

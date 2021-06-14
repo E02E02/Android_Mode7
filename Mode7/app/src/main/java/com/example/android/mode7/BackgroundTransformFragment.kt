@@ -1,21 +1,24 @@
 package com.example.android.mode7
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.scale
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.android.mode7.data.Datasource
-import com.example.android.mode7.databinding.FragmentScreenBinding
+import com.example.android.mode7.databinding.FragmentBackgroundTransformBinding
 import com.example.android.mode7.model.SharedViewModel
 
 /**
  *
  */
-class ScreenFragment : Fragment() {
+class BackgroundTransformFragment : Fragment() {
     //DataBinding
-    private lateinit var binding: FragmentScreenBinding
+    private lateinit var binding: FragmentBackgroundTransformBinding
 
     //SharedViewModel
     private val viewModel: SharedViewModel by activityViewModels()
@@ -23,34 +26,43 @@ class ScreenFragment : Fragment() {
     //Initialize data
     private val mDataset = Datasource().loadMaps()
 
+    //ViewPort
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val fragmentBinding = FragmentScreenBinding.inflate(inflater, container, false)
+        val fragmentBinding = FragmentBackgroundTransformBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+
         return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+        binding.apply {
+            val mViewPort = context?.let { ViewPort(it) }
+            viewPort = mViewPort
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
             sharedViewModel = viewModel
             // Assign the fragment
-            screenFragment = this@ScreenFragment
+            backgroundTransformFragment = this@BackgroundTransformFragment
         }
+
+        val resourceImage : Bitmap = BitmapFactory.decodeResource(context?.resources, mDataset[1])
+        val clippedImage : Bitmap = resourceImage.scale(640,640)
+
+        viewModel.setClippedImage(clippedImage)
     }
 
     @Suppress("DEPRECATION")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.clippedimage.observe(viewLifecycleOwner, {
-            binding.screen.setImageBitmap(viewModel.clippedimage.value)
+        viewModel.selectedmapnumber.observe(viewLifecycleOwner, {
+            binding.background.setImageResource(mDataset[it])
         })
-
     }
 
     /**
