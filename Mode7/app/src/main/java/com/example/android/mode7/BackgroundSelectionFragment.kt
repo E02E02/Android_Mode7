@@ -7,28 +7,35 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.android.mode7.adapter.ItemAdapter
+import com.example.android.mode7.adapter.BackgroundSelectionAdapter
 import com.example.android.mode7.data.Datasource
 import com.example.android.mode7.databinding.FragmentBackgroundSelectionBinding
-import com.example.android.mode7.model.SharedViewModel
+import com.example.android.mode7.model.Mode7ViewModel
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
 
 /**
  *
  */
-class BackgroundSelectionFragment : Fragment() {
+class BackgroundSelectionFragment : BottomSheetDialogFragment() {
     //DataBinding
     private lateinit var binding: FragmentBackgroundSelectionBinding
 
     //SharedViewModel
-    private val viewModel: SharedViewModel by activityViewModels()
+    private val viewModel: Mode7ViewModel by activityViewModels()
 
     // Initialize data
     private var mDataset = Datasource().loadMaps()
 
     //RecyclerView
-    private var mAdapter : ItemAdapter? = null
+    private var mAdapter : BackgroundSelectionAdapter? = null
+
+    companion object {
+        const val TAG = "BackgroundSelectionFragment"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +49,17 @@ class BackgroundSelectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+
+        binding.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
-            sharedViewModel = viewModel
+            mode7ViewModel = viewModel
             // Assign the fragment
             backgroundSelectionFragment = this@BackgroundSelectionFragment
         }
 
-        mAdapter = ItemAdapter(binding.backgroundSelection, mDataset){position -> onListItemTouched(position)}
+        mAdapter = BackgroundSelectionAdapter(binding.backgroundSelection, mDataset){position -> onListItemTouched(position)}
 
         binding.backgroundSelection.apply {
             // set a LinearLayoutManager to handle Android

@@ -4,7 +4,40 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2e3ce69-3274-4373-970a-eed02311c594" name="Default Changelist" comment="" />
+    <list default="true" id="e2e3ce69-3274-4373-970a-eed02311c594" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/adapter/BackgroundSelectionAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-hdpi/ic_launcher_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-mdpi/ic_launcher_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xhdpi/ic_launcher_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xxhdpi/ic_launcher_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/BackgroundSelectionFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/BackgroundSelectionFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/BackgroundTransformFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/BackgroundTransformFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/ScreenFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/ScreenFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/java/com/example/android/mode7/adapter/ItemAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/layout/fragment_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/layout/fragment_screen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mode7/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Mode7/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +53,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="dev.polek.adbwifi.settings.AdbWifiConfigurable" />

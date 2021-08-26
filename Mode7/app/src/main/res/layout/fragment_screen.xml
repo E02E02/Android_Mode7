@@ -9,8 +9,8 @@
             type="com.example.android.mode7.ScreenFragment" />
 
         <variable
-            name="sharedViewModel"
-            type="com.example.android.mode7.model.SharedViewModel" />
+            name="mode7ViewModel"
+            type="com.example.android.mode7.model.Mode7ViewModel" />
     </data>
 
     <FrameLayout
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/fragment_screen"
-            android:src="@drawable/map2" />
+            android:imageBitmap="@{mode7ViewModel.clippedimage}" />
 
     </FrameLayout>
 

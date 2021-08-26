@@ -1,5 +1,6 @@
 package com.example.android.mode7
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -8,7 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.MotionEventCompat
 
-@Suppress("DEPRECATION")
+@SuppressLint("ViewConstructor")
 class ViewPort @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -16,13 +17,11 @@ class ViewPort @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr), View.OnTouchListener {
 
     //Initialize data
-    //private val mDataset = Datasource().loadMaps()
-
     private var viewPortRight = resources.getDimension(R.dimen.viewPortRectRight)
     private var viewPortBottom = resources.getDimension(R.dimen.viewPortRectBottom)
-    //private var viewPortTop = resources.getDimension(R.dimen.viewPortRectTop)
-    //private var viewPortLeft = resources.getDimension(R.dimen.viewPortRectLeft)
 
+    //private var pos_x = 0F
+    //private var pos_y = 0F
     //frame around the viewport
     private lateinit var frameViewPort: Rect
 
@@ -38,14 +37,10 @@ class ViewPort @JvmOverloads constructor(
         drawViewPort(canvas)
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        frameViewPort = Rect(0, 0, viewPortRight.toInt(), viewPortBottom.toInt())
-    }
-
     private fun drawViewPort(canvas: Canvas) {
+        Log.d("debug", "test")
 
-        canvas.translate(40.0F, 0.0F)
+        //canvas.translate(pos_x, pos_y)
         canvas.save()
 
         canvas.drawColor(Color.TRANSPARENT)
@@ -58,10 +53,13 @@ class ViewPort @JvmOverloads constructor(
         canvas.restore()
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        frameViewPort = Rect(0, 0, viewPortRight.toInt(), viewPortBottom.toInt())
+    }
+
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         //translation, skewing and rotation of ViewPort
-        Log.d("debug", "test")
-
         return when (MotionEventCompat.getActionMasked(event)) {
             MotionEvent.ACTION_DOWN -> {
                 Log.d("DEBUG_TAG", "Action was DOWN")

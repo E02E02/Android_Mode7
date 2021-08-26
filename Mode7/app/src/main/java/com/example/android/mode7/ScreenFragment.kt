@@ -1,14 +1,16 @@
 package com.example.android.mode7
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.android.mode7.data.Datasource
 import com.example.android.mode7.databinding.FragmentScreenBinding
-import com.example.android.mode7.model.SharedViewModel
+import com.example.android.mode7.model.Mode7ViewModel
 
 /**
  *
@@ -18,10 +20,7 @@ class ScreenFragment : Fragment() {
     private lateinit var binding: FragmentScreenBinding
 
     //SharedViewModel
-    private val viewModel: SharedViewModel by activityViewModels()
-
-    //Initialize data
-    private val mDataset = Datasource().loadMaps()
+    private val viewModel: Mode7ViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,32 +33,22 @@ class ScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+
+        binding.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
-            sharedViewModel = viewModel
+            mode7ViewModel = viewModel
             // Assign the fragment
             screenFragment = this@ScreenFragment
         }
     }
-
-    @Suppress("DEPRECATION")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.clippedimage.observe(viewLifecycleOwner, {
-            binding.screen.setImageBitmap(viewModel.clippedimage.value)
-        })
-
-    }
-
-    /**
-     * This fragment lifecycle method is called when the view hierarchy associated with the fragment
-     * is being removed. As a result, clear out the binding object.
-     */
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 }
+
+@BindingAdapter("android:imageBitmap")
+fun loadImage(view: ImageView, bitmap: Bitmap?) {
+    view.setImageBitmap(bitmap)
+}
+
 
 

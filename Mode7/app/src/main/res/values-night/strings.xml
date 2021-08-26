@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="up">up</string>
+    <string name="down">down</string>
     <string name="left">left</string>
+    <string name="right">right</string>
 </resources>

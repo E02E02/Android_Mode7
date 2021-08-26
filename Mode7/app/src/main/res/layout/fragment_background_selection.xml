@@ -10,13 +10,21 @@
             type="com.example.android.mode7.BackgroundSelectionFragment" />
 
         <variable
-            name="sharedViewModel"
-            type="com.example.android.mode7.model.SharedViewModel" />
+            name="mode7ViewModel"
+            type="com.example.android.mode7.model.Mode7ViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="end"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/background_selection"

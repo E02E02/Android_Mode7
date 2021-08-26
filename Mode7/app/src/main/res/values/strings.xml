@@ -12,4 +12,9 @@
     <string name="fragment_background_selection">Fragment Background Selection</string>
     <string name="fragment_background_transform">Fragment Background Transform</string>
     <string name="fragment_screen">Fragment Screen</string>
+    <string name="up">up</string>
+    <string name="down">down</string>
+    <string name="left">left</string>
+    <string name="right">right</string>
+    <string name="select">SELECT</string>
 </resources>

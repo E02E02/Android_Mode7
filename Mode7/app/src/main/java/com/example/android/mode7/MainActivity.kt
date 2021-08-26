@@ -6,7 +6,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-    @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         // FullScreen App
         requestWindowFeature(Window.FEATURE_NO_TITLE)
