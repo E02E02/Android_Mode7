@@ -1,2 +1,2 @@
 # Android_Mode7
-This Android app is dedicated to visually show graphical background transformation corresponding to Mode7.
+This Android application is dedicated to visually show background transformation mode also known as Mode7 in video games.
