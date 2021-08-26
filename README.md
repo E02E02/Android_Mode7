@@ -1,2 +1,2 @@
 # Android_Mode7
-App testing - Legacy graphical visual effect on Android.
+This Android app is dedicated to visually show graphical background transformation corresponding to Mode7.
