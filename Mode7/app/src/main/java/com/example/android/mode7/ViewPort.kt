@@ -20,8 +20,6 @@ class ViewPort @JvmOverloads constructor(
     private var viewPortRight = resources.getDimension(R.dimen.viewPortRectRight)
     private var viewPortBottom = resources.getDimension(R.dimen.viewPortRectBottom)
 
-    //private var pos_x = 0F
-    //private var pos_y = 0F
     //frame around the viewport
     private lateinit var frameViewPort: Rect
 

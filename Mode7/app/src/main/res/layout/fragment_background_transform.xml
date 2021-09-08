@@ -5,6 +5,7 @@
     tools:context=".BackgroundTransformFragment">
 
     <data>
+
         <variable
             name="viewPort"
             type="com.example.android.mode7.ViewPort" />
@@ -114,5 +115,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

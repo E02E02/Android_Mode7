@@ -2,15 +2,17 @@ package com.example.android.mode7.adapter
 
 import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.mode7.R
+import com.example.android.mode7.model.Background
 
 /**
  * Adapter for the [RecyclerView] in [BackgroundSelectionFragment]. Displays [Map] data object.
  */
 class BackgroundSelectionAdapter(
     private val context: RecyclerView,
-    private val dataset: List<Int>,
+    private val dataset: List<Background>,
     private val onItemTouched: (position: Int) -> Unit,
 ): RecyclerView.Adapter<BackgroundSelectionAdapter.BackgroundSelectionHolder>() {
 
@@ -19,7 +21,7 @@ class BackgroundSelectionAdapter(
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
     class BackgroundSelectionHolder(private val view: View, private val onItemTouched: (position: Int) -> Unit) : RecyclerView.ViewHolder(view), View.OnTouchListener {
-        //val textView: TextView = view.findViewById(R.id.item_title)
+        val textView: TextView = view.findViewById(R.id.item_title)
         val imageView: ImageView = view.findViewById(R.id.item_image)
 
         init {
@@ -48,8 +50,9 @@ class BackgroundSelectionAdapter(
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(viewHolder: BackgroundSelectionHolder, position: Int) {
-        //val item = dataset[position]
-        viewHolder.imageView.setImageResource(dataset[position])
+        val item = dataset[position]
+        viewHolder.textView.text = context.resources.getString(item.stringResourceId)
+        viewHolder.imageView.setImageResource(item.imageResourceId)
     }
 
     /**

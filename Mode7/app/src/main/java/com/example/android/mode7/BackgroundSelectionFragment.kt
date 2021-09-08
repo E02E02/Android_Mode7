@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +16,7 @@ import com.example.android.mode7.databinding.FragmentBackgroundSelectionBinding
 import com.example.android.mode7.model.Mode7ViewModel
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
+import kotlin.math.absoluteValue
 
 /**
  *
@@ -35,13 +36,23 @@ class BackgroundSelectionFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "BackgroundSelectionFragment"
+
+        fun newInstance(): BackgroundSelectionFragment{
+            return BackgroundSelectionFragment()
+        }
     }
 
+    @Nullable
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val fragmentBinding = FragmentBackgroundSelectionBinding.inflate(inflater, container, false)
+        val selectionFragmentView = layoutInflater.inflate(R.layout.fragment_background_selection, null)
+        val fragmentBinding = FragmentBackgroundSelectionBinding.inflate(
+            inflater,
+            selectionFragmentView as ViewGroup,
+            false
+        )
         binding = fragmentBinding
 
         return fragmentBinding.root
@@ -74,15 +85,16 @@ class BackgroundSelectionFragment : BottomSheetDialogFragment() {
         }
     }
 
+    private fun onListItemTouched(position: Int) {
+        viewModel.setSelectedMapNumber(position)
+        viewModel.setBackgroundImage(mDataset[position].imageResourceId)
+    }
+
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment
      * is being removed. As a result, clear out the binding object.
      */
     override fun onDestroyView() {
         super.onDestroyView()
-    }
-
-    private fun onListItemTouched(position: Int) {
-        viewModel.setSelectedMapNumber(position)
     }
 }

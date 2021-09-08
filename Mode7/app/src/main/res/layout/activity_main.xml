@@ -58,19 +58,5 @@
         app:layout_constraintWidth_percent="1"
         tools:layout="@layout/fragment_background_transform" />
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/fragmentBackgroundSelection"-->
-    <!--        android:name="com.example.android.mode7.BackgroundSelectionFragment"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toStartOf="@id/guidelineRight"-->
-    <!--        app:layout_constraintHeight_default="percent"-->
-    <!--        app:layout_constraintHeight_percent=".5"-->
-    <!--        app:layout_constraintStart_toEndOf="@id/guidelineLeft"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/guidelineMiddle"-->
-    <!--        app:layout_constraintWidth_default="percent"-->
-    <!--        app:layout_constraintWidth_percent="1" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

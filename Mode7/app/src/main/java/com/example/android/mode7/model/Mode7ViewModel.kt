@@ -41,6 +41,15 @@ class Mode7ViewModel : ViewModel() {
         _V.value?.plus(10)
     }
 
+    //Background image Mode7 transform to apply
+    private var _backgroundimage = MutableLiveData<Int>()
+    val backgroundimage: LiveData<Int>
+        get() = _backgroundimage
+
+    fun setBackgroundImage(backgroundimage : Int){
+        _backgroundimage.value = backgroundimage
+    }
+
     //Screen image Mode7 transform applied
     private var _clippedimage = MutableLiveData<Bitmap>()
     val clippedimage: LiveData<Bitmap>
